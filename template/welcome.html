@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>Rest</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* make sure that your css rulesets are between the <style> tags */
+
+        body{
+            margin: 0;
+        }    
+        
+        #top-of-page{
+            color: yellow;
+            background-color: #642be2;
+            padding: 2rem;
+        }
+
+        #middle-of-page{
+            /* color: yellow; */
+            /* background-color: #642be2; */
+            padding: 2rem;
+        }
+
+        #time{
+            color: blueviolet;
+            text-align: right;
+        }
+
+        #bottom-of-page{
+            color: yellow;
+            background-color: darkslategray;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="top-of-page">
+        <h1>Welcome to Restaurant for only tacos</h1>
+        <h2>Google App Engine</h2>
+    </div>
+
+    <div id="middle-of-page">
+        <p id="time"></p>
+
+        <hr>
+        
+        <h3>You can order tacos</h3>
+        <img src="https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1519665233/slow-cooker-carnitas-tacos-ck-1804p38.jpg" alt="tacos" width="25%">
+        <p>Click here to <a href="/tacos">order tacos</a>, You ask for a TACO, we choose the filling for you!</p>
+        
+        <hr>
+        
+        <h3>You can also ask for your check</h3>
+        <img src="https://www.numisbids.com/sales/hosted/aureo/329/image03148.jpg" alt="bolivares bills"  width="25%">
+        <p>Click here to <a href="/bill">request for your check</a>.  We are happy you pay for your classmate's bill!</p>
+    </div>
+
+    <div id="bottom-of-page">
+        <span>Created by Marianela Crissman</span>
+        <span>CSSIX NEIU 2019</span>
+
+    </div>
+
+<script>
+    console.log('script is running...');
+    // make sure that your javascript code is between the <script> tags
+
+
+const paragraphElement = document.querySelector('#time');
+const showTheTime = () => {
+    paragraphElement.innerHTML = new Date();
+};
+setInterval(showTheTime, 1000);
+
+
+</script>
+</body>
