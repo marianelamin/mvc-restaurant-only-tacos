@@ -34,6 +34,14 @@ import webapp2
 import os
 import random
 import jinja2
+#import taco_model
+
+from google.appengine.ext import ndb
+
+
+class TacoFilling(ndb.Model):
+
+    tacoIn = ndb.StringProperty(required=True)
 
 
 
@@ -46,10 +54,21 @@ def get_bill():
 
 def get_tacos():
     # Add a list of fortunes to the empty fortune_list array
-    filling_list=['steak', 'carnitas', 'veggie', 'chicken', 'ground beef']
+    filling_list = get_all_tacos()    
     # Use the random library to return a random element from the array
-    random_filling = random.choice(filling_list)
+    if len(filling_list) == 0:
+        random_filling = 'test-filling'
+    else:
+        random_filling = random.choice(filling_list)
     return random_filling
+
+def get_all_tacos():
+    #fillings = ['steak', 'carnitas', 'veggie', 'chicken', 'ground beef']
+    fillings = TacoFilling.query().filter().fetch()
+    only_fillings = []
+    for fil in fillings:
+        only_fillings.append(str(fil.tacoIn))
+    return only_fillings
 
 # Remember, you can get this by searching for jinja2 google app engine
 jinja_current_directory = jinja2.Environment(
@@ -63,7 +82,16 @@ class TacosHandler(webapp2.RequestHandler):
         results_template = jinja_current_directory.get_template('template/tacos_results.html')
         self.response.write(results_template.render(tacoType = get_tacos()))
 
-    # def post(self):
+    #this gets executed when you use a form with POST method and /tacos route
+    def post(self):
+        # get input from the html form
+        new_filling_from_form = self.request.get('new-filling')
+        tacoFilling1 = TacoFilling( tacoIn = new_filling_from_form)
+        k = tacoFilling1.put()
+        results_template = jinja_current_directory.get_template('template/add_taco.html')
+        #self.response.write(results_template.render(filling = k.get(TacoFilling.tacoIn)))
+        self.response.write(results_template.render(filling = k.get().tacoIn))
+
 
 class BillHandler(webapp2.RequestHandler):
     def get(self):
@@ -78,11 +106,19 @@ class HelloHandler(webapp2.RequestHandler):
         results_template = jinja_current_directory.get_template('template/welcome.html')
         self.response.write(results_template.render())
 
+
+class AllFillingsHandler(webapp2.RequestHandler):
+    def get(self):
+        #results_template = jinja_current_directory.get_template('template/welcome.html')
+        #self.response.write(results_template.render())
+        self.response.write(get_all_tacos())
+
 # Route mapping
 app = webapp2.WSGIApplication([
     # This line routes the main url ('/')  - also know as
     # The root route - to the Fortune Handler
     ('/', HelloHandler),
     ('/tacos', TacosHandler), #maps '/predict' to the TacosHandler
-    ('/bill', BillHandler) #maps '/farewell' to the BillHandler
+    ('/bill', BillHandler), #maps '/farewell' to the BillHandler
+    ('/fillings', AllFillingsHandler),
 ], debug=True)

@@ -17,4 +17,13 @@
 <h1>Food is ready!</h1>
 <h2>You ordered <span class="taco-type-class">{{ tacoType }}</span> tacos.  Enjoy!</h2>
 
+
+<hr>
+
+<h3> Want to recommend a new filling? </h3>
+<form action="/tacos" method="POST" >
+	<label> New filling: </label>
+	<input type="text" name="new-filling">
+	<button type="submit" name="submit"> SUBMIT </button>
+</form>
 </body>
