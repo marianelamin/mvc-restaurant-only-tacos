@@ -3,38 +3,7 @@
     <title>Rest</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* make sure that your css rulesets are between the <style> tags */
-
-        body{
-            margin: 0;
-        }    
-        
-        #top-of-page{
-            color: yellow;
-            background-color: #642be2;
-            padding: 2rem;
-        }
-
-        #middle-of-page{
-            /* color: yellow; */
-            /* background-color: #642be2; */
-            padding: 2rem;
-        }
-
-        #time{
-            color: blueviolet;
-            text-align: right;
-        }
-
-        #bottom-of-page{
-            color: yellow;
-            background-color: darkslategray;
-            padding: 2rem;
-            display: flex;
-            justify-content: space-around;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
@@ -46,6 +15,14 @@
 
     <div id="middle-of-page">
         <p id="time"> (time) </p>
+        <img class="bubble-flag" src="static/Thailand.png" atl="Thailand Flag">
+        <img class="bubble-flag" src="static/South-Africa.png" atl="South-Africa Flag">
+        <img class="bubble-flag" src="static/Pakistan.png" atl="Pakistan Flag">
+        <img class="bubble-flag" src="static/Spain.png" atl="Spain Flag">
+        <img class="bubble-flag" src="static/Mexico.png" atl="Mexicon Flag">
+        <img class="bubble-flag" src="static/Venezuela.png" atl="Venezuelan Flag">
+        <img class="bubble-flag" src="static/Saudi-Arabia.png" atl="Saudi-Arabia Flag">
+        <img class="bubble-flag" src="static/USA.png" atl="USA Flag">
 
         <hr>
         
@@ -66,21 +43,5 @@
         <span>CSSIX NEIU 2019</span>
 
     </div>
-
-    <script>
-        console.log('script is running...');
-        // make sure that your javascript code is between the <script> tags
-        
-        // select the element with the id="time"
-        const paragraphElement = document.querySelector('#time');
-
-        // crerate a function that assigns the "new Date()" (the date and time) as the innerHTML of the paragraph element
-        const showTheTime = () => {
-            paragraphElement.innerHTML = new Date();
-        };
-
-        // set so every 1000 ms (so every one second), the function showtheTime executes
-        setInterval(showTheTime, 1000);
-
-    </script>
+    <script src="static/script.js"></script>
 </body>
