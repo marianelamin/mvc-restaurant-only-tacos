@@ -22,6 +22,10 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+  
+#added static directory with static files such as css, js and images
+- url: /static
+  static_dir: static
 
 #static directories should go ABOVE the catch all url (.*)
 - url: .*
