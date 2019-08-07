@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+}    
+
+#top-of-page{
+    color: yellow;
+    background-color: #642be2;
+    padding: 2rem;
+}
+
+.bubble-flag{
+    width:10%;
+}
+
+#middle-of-page{
+    /* color: yellow; */
+    /* background-color: #642be2; */
+    padding: 2rem;
+}
+
+#time{
+    color: blueviolet;
+    text-align: right;
+}
+
+#bottom-of-page{
+    color: yellow;
+    background-color: darkslategray;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
