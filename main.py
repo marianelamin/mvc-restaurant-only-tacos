@@ -39,8 +39,8 @@ import jinja2
 from google.appengine.ext import ndb
 
 
-class TacoFilling(ndb.Model):
-
+class TacoFillingModel(ndb.Model):
+    #list here all the properties of the entity
     tacoIn = ndb.StringProperty(required=True)
 
 
@@ -54,7 +54,7 @@ def get_bill():
 
 def get_tacos():
     # Add a list of fortunes to the empty fortune_list array
-    filling_list = get_all_tacos()    
+    filling_list = get_all_tacos()
     # Use the random library to return a random element from the array
     if len(filling_list) == 0:
         random_filling = 'test-filling'
@@ -64,7 +64,7 @@ def get_tacos():
 
 def get_all_tacos():
     #fillings = ['steak', 'carnitas', 'veggie', 'chicken', 'ground beef']
-    fillings = TacoFilling.query().filter().fetch()
+    fillings = TacoFillingModel.query().filter().fetch()
     only_fillings = []
     for fil in fillings:
         only_fillings.append(str(fil.tacoIn))
@@ -86,10 +86,9 @@ class TacosHandler(webapp2.RequestHandler):
     def post(self):
         # get input from the html form
         new_filling_from_form = self.request.get('new-filling')
-        tacoFilling1 = TacoFilling( tacoIn = new_filling_from_form)
+        tacoFilling1 = TacoFillingModel( tacoIn = new_filling_from_form)
         k = tacoFilling1.put()
         results_template = jinja_current_directory.get_template('template/add_taco.html')
-        #self.response.write(results_template.render(filling = k.get(TacoFilling.tacoIn)))
         self.response.write(results_template.render(filling = k.get().tacoIn))
 
 
@@ -101,7 +100,7 @@ class BillHandler(webapp2.RequestHandler):
     # def post(self):
 
 
-class HelloHandler(webapp2.RequestHandler):
+class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
         results_template = jinja_current_directory.get_template('template/welcome.html')
         self.response.write(results_template.render())
@@ -117,7 +116,7 @@ class AllFillingsHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     # This line routes the main url ('/')  - also know as
     # The root route - to the Fortune Handler
-    ('/', HelloHandler),
+    ('/', WelcomeHandler),
     ('/tacos', TacosHandler), #maps '/predict' to the TacosHandler
     ('/bill', BillHandler), #maps '/farewell' to the BillHandler
     ('/fillings', AllFillingsHandler),
